@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+
+
+
+      <!-- ========== section start ========== -->
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="titlemb-30">
+                  <h2>{{ level }}</h2>
+                </div>
+               
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="{{ url_for('tea') }}">Home</a>
+                      </li>                      
+                      <li class="breadcrumb-item active" aria-current="page">
+                        {{ level }}
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card-style settings-card-1 mb-30">
+                
+                <div class="profile-info">
+                  {{ msg }}
+                
+                
+		                  <div class="table-wrapper table-responsive">
+		                    <table class="table">
+		                      <thead>
+		                        <tr>
+		                          <th><h6><font color='blue'>Drawing exercise</font></h6></th>
+		                          <th><h6><font color='green'>Student Attempts</font></h6></th>
+		                        </tr>
+		                        <!-- end table row-->
+		                      </thead>
+		                      <tbody>
+
+                                {% for item in val %}
+		                        <tr>
+		                          
+		                          <td class="min-width">
+                                    <h3>{{ item[0] }}</h3>   
+                                                        
+                                    <img src="static/request_img/{{ item[1] }}" alt={{ item[0] }} width="400" />
+                                    <br/>
+                                    
+                                    
+                                     Maximum Score: <b> <font color='green'>{{ item[5] }}</font> </b>
+                                      <br/>
+                                     {% if session.level=="admin" %}   
+                                     
+                                          <ul class="buttons-group">
+                                            <li>
+                                            <a href="home?task=del&value={{ item[3] }}&level={{ item[2] }}" class="text-danger" title="Delete">
+                                              <i class="lni lni-trash-can"></i>
+                                            </a>
+                                            </li>
+                                            
+                                            <li>
+                                            <a href="adm_add?task=edit&value={{ item[3] }}&level={{ item[2] }}" class="text-success" title="Edit">
+                                              <i class="lni lni-pencil"></i>
+                                            </a>
+                                            </li>                                           
+                                          </ul>  
+
+
+                                          
+                                     {% endif %} 
+		                          </td>
+
+
+
+		                          <td class="min-width">
+                                            {% if session.username is defined %}
+                            
+                                                <form action="prediction" method="POST" enctype="multipart/form-data">  
+                                                    <input type="hidden" name="img1" value={{ item[1] }}> 
+                                                    <input type="hidden" name="req_id" value={{ item[3] }}> 
+                                                    <input type="hidden" name="level" value= {{ item[2] }} > 
+                                                    
+                                                    Enter student id:
+                                                    <br/>
+                                                    <input type="text" name="user_id" required> 
+                                                    <br/> <br/>                                                   
+                                                    <input type="file" name="img2" required>
+                                                    <br/><br/>
+                                                    
+                                                    <input type="submit" name="btn" value="Upload Drawing">
+                                                </form>  
+                                                <br/>                                          
+                                            {% endif %}
+                                            
+                                            {% set ns = namespace(t=0) %}
+                                        
+                                            {% for u_resp in val2 %}  
+                                            
+                                                {% set number1 = u_resp[5] | int %}
+                                                {% set number2 = item[3] | int %}                            
+                                        
+                                                {% if number1 == number2 %}
+                                                    {% set ns.t = ns.t + 1 %} 
+                                                {% endif %}
+                                                                
+                                            {% endfor %}
+                                           
+
+                                            
+
+                                            {% if session.level=="user" %}
+                                                <a href="more?id={{item[3]}}&level={{ request.args.get('level') }}&page=1">{{ ns.t }} Drawing(s) made by {{ session.username }} </a>                                           
+                                            {% elif session.level=="admin" %}    
+                                                Admin manage: <a href="more?id={{item[3]}}&level={{ request.args.get('level') }}&page=1">{{ ns.t }} attempted drawings </a>
+                                            {% else %}
+                                                <a href="more?id={{item[3]}}&level={{ request.args.get('level') }}&page=1">{{ ns.t }} attempted drawings </a>
+                                            {% endif %}
+         
+		                          </td>		                          
+		                        </tr> 
+                                {% endfor %}
+
+                                
+		                        </tbody>
+	                    </table>
+	                    <!-- end table -->
+	                  </div>       
+	                  
+	                  
+	                           
+                </div>
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end col -->
+
+            
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end container -->
+      </section>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+
+      
+      <!-- ========== section start ========== -->
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="title mb-30">
+                  <h2>TEA Artificial intelligence Evaluation Portal (TAIEP)</h2>
+                </div>
+                {{ msg }}
+              </div>
+              <!-- end col -->
+             
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+          <b>
+         The program uses Artificial intelligence (AI) Computer Vision (CV) algorithms 
+          to compare the drawing exercise with the student drawing and calculate the differences. 
+          </b>
+          <br/><br/>
+          Choose drawing category:
+          <br/><br/>
+          <div class="row">
+            <div class="col-xl-4 col-lg-4 col-sm-4">
+              <div class="icon-card mb-30">
+                
+                <div class="content">
+	                
+                  <h3 class="text-bold mb-10"><a href="home?level=1">Still-Life Drawings</a></h3>
+                  
+                  <a href="home?level=1"><img src="{{ url_for('static', filename='images/basic.jpg') }}" width='100%'></a>
+                  <p align='center'><a href="home?level=1" class="main-btn success-btn rounded-md btn-hover">Enter</a></p>         
+                </div>                
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-4 col-lg-4 col-sm-4">
+              <div class="icon-card mb-30">
+                
+                <div class="content">
+                  <h3 class="text-bold mb-10"><a href="home?level=2">Life Drawings</a></h3>
+                  
+                  <a href="home?level=2"><img src="{{ url_for('static', filename='images/inter.jpg') }}" width='100%'></a>
+                  <p align='center'><a href="home?level=2" class="main-btn warning-btn rounded-md btn-hover">Enter</a></p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+
+
+            <div class="col-xl-4 col-lg-4 col-sm-4">
+              <div class="icon-card mb-30">
+                
+                <div class="content">
+                  <h3 class="text-bold mb-10"><a href="home?level=2">Biological Drawings</a></h3>
+                  
+                  <a href="home?level=3"><img src="{{ url_for('static', filename='images/biological_drawing.jpg') }}" width='100%'></a>
+                 
+                  <p align='center'><a href="home?level=3" class="main-btn primary-btn rounded-md btn-hover">Enter</a></p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            
+            
+             <!-- End Col 
+            <div class="col-xl-4 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                
+                <div class="content">
+                  <h3 class="text-bold mb-10"><a href="home?level=3">Advanced</a></h3>
+                  
+                  <a href="home?level=3"><img src="{{ url_for('static', filename='images/advance.jpg') }}" width='100%'></a>
+                  <p align='center'><a href="home?level=3" class="main-btn warning-btn rounded-md btn-hover">Enter Class</a></p>
+                </div>
+              </div>
+              
+            </div>
+            -->
+          
+            
+          </div>
+          <!-- End Row -->
+  
+          
+        </div>
+        <!-- end container -->
+      </section>
+
+{% endblock %}
+

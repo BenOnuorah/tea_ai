@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+
+      <!-- ========== section start ========== -->
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="titlemb-30">
+                  <h2>Register</h2>
+                </div>				
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="{{ url_for('tea') }}">Home</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Register
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+
+		<form action="{{ url_for('register') }}" method="post">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card-style settings-card-1 mb-30">
+                <div
+                  class="
+                    title
+                    mb-30
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                  "
+                >
+				{{ msg }}
+                </div>
+                <div class="profile-info">                  
+                  <div class="input-style-1">
+                    <label>Username</label>
+                    <input type="text"
+					name="username" placeholder="Username" id="username" required
+                    />
+                  </div>
+                  <div class="input-style-1">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password" id="password" required>
+                  </div>
+				  <div class="input-style-1">
+                    <label>Email</label>
+                    <input type="email"
+					name="email" placeholder="test@mail.com" id="email" required
+                    />
+                  </div>
+                  
+                  <div class="col-12">                      
+					  <input type="submit" value="Register" class="main-btn primary-btn btn-hover">
+                  </div>
+
+                    <br/>Already registered? <a href="{{ url_for('login') }}">Click here to Login</a>
+                </div>
+              </div>
+              <!-- end card -->
+            </div>
+            <!-- end col -->
+
+            
+          </div>
+          <!-- end row -->
+		</form>
+        </div>
+        <!-- end container -->
+      </section>
+      <!-- ========== section end ========== -->
+
+{% endblock %}

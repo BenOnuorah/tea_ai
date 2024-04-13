@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+
+      <!-- ========== section start ========== -->
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="titlemb-30">
+
+                  {% if request.args.get('task') == 'edit' %} 
+                    <h2>Admin: Edit</h2>
+                  {% else %}
+                    <h2>Admin: Add</h2>
+                  {% endif %}
+                </div>
+               
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="{{ url_for('tea') }}">Home</a>
+                      </li>        
+                      
+                      {% if request.args.get('task') == 'edit' %} 
+                        <li class="breadcrumb-item">
+                          <a href="home?level={{ preview[6] }}">BACK</a>
+                        </li>                        
+                      {% endif %}
+
+                    
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Drawing
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card-style settings-card-1 mb-30">
+                
+                <div class="profile-info">
+
+
+                    <form action="/adm_add_process" method = "POST" enctype="multipart/form-data">
+
+                          <div class="input-style-1">
+                            <label>name</label>
+                            {% if preview is defined %}
+                                <input type = "text" name = "name" value="{{ preview[2] }}" />
+                            {% else %}
+                                <input type = "text" name = "name" />
+                            {% endif %}
+                          </div>
+
+                          <div class="input-style-1">
+                            <label>Detail</label>
+                            {% if preview is defined %}
+                                <textarea name="detail">{{ preview[3] }}</textarea>
+                            {% else %}
+                                <textarea name="detail"></textarea>
+                            {% endif %}
+                           
+                          </div>
+
+                          <div class="select-style-1">
+                            <label>Type</label>
+                                <div class="select-position">
+                                    <select name="level">
+                                      {% if preview is defined %}
+                                          {% if preview[6] == '1' %}
+                                              <option value=1 selected>Still-Life Drawing</option>
+                                          {% elif preview[6] == '2' %}
+                                              <option value=2 selected>Life Drawing</option>   
+                                          {% elif preview[6] == '3' %}
+                                              <option value=3 selected>Biological Drawing</option>                                         
+                                          {% endif %}
+                                      {% endif %}
+                                    <option value=1>Still-Life Drawing</option>
+                                    <option value=2>Life Drawing</option>
+                                    <option value=3>Biological Drawing</option>
+                                    </select>
+                                </div>
+                          </div>
+                          <!-- NOT defined, dont show upload element when in edit mode-->
+                          {% if preview is not defined %}
+                            <div class="input-style-1">
+                              <label>Upload Image</label>
+                              <input type="file" name="img1">
+                            </div>
+                          {% endif %}
+
+                          {% if request.args.get('task') == 'edit' %} 
+                              <input type = "hidden" name = "edit_id" value="{{ preview[0] }}" />
+                          {% endif %}
+
+                          <div class="col-12">                      
+                            <input type="submit" value="Submit" class="main-btn primary-btn btn-hover">
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+            <!-- end card -->
+            </div>
+            <!-- end col -->
+        
+        
+            </div>
+            <!-- end row -->
+            </div>
+            <!-- end container -->
+        </section>    
+          <!-- ========== title-wrapper end ========== -->
+{% endblock %}
